@@ -1,5 +1,4 @@
 var Pipe = function () {
-	this.top = random(height/2);
 	this.bottom = null;
 	this.x = width;
 	this.w = 20;
@@ -9,6 +8,8 @@ var Pipe = function () {
 	this.speed = 5;
 
 	this.gap = random(height/8, height/4);
+
+	this.top = random(height - (this.gap + height/16));
 
 	this.show = function () {
 		fill(this.color[0], this.color[1], this.color[2]);
@@ -26,6 +27,13 @@ var Pipe = function () {
 
 	this.offScreen = function () {
 		return this.x + this.w < 0;
+	}
+
+	this.hits = function(bird) {
+		if(bird.x >= this.x && bird.x <= this.x + this.w)
+			if(bird.y < this.top || bird.y > this.top + this.gap)
+				return true;
+		return false;
 	}
 
 }

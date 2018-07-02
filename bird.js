@@ -1,6 +1,7 @@
 function Bird () {
 	this.y = height/2;
 	this.x = 40;
+	this.r = 25;
 
 	this.birdColor = [255,255,255];
 
@@ -11,7 +12,7 @@ function Bird () {
 
 	this.show = function () {
 		fill(this.birdColor[0], this.birdColor[1], this.birdColor[2]);
-		ellipse(this.x, this.y, 25,25);
+		ellipse(this.x, this.y, this.r,this.r);
 	}
 
 	this.update = function () {
@@ -21,10 +22,15 @@ function Bird () {
 	}
 
 	this.reset = function () {
-		if(this.y > height || this.y < 0){
-			this.y= height/2;
-			this.velocity = 0;
-		}
+		
+		this.y= height/2;
+		this.velocity = 0;
+	}
+
+	this.hitBoundary = function() {
+		if(this.y > height || this.y < 0)
+			return true;
+		return false;
 	}
 
 	this.flap = function() {
